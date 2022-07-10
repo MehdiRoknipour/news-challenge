@@ -24,7 +24,7 @@ function News() {
     useEffect(() => {
         const timer = setInterval(() => fetchNews(), delay * 1000);
         return () => clearInterval(timer);
-    }, [counter]);
+    }, []);
 
     return (
         <div className="app__container">
