@@ -22,13 +22,7 @@ function News() {
     }
 
     useEffect(() => {
-        fetchNews();
-    }, []);
-
-    const [counter, setCounter] = React.useState(0);
-
-    useEffect(() => {
-        const timer = counter < 60 && setInterval(() => setCounter(counter + 1), delay * 1000);
+        const timer = setInterval(() => fetchNews(), delay * 1000);
         return () => clearInterval(timer);
     }, [counter]);
 
