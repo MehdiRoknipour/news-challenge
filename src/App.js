@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+import Spinner from "./component/spinner";
+
+import Layout from "./container";
+const News = lazy(() => import("./pages/news"));
+const NewsItem = lazy(() => import("./pages/news/item"));
+const Comments = lazy(() => import("./pages/comments"));
+const Favorites = lazy(() => import("./pages/favorites"));
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Layout>
+            <Suspense fallback={<Spinner message="Still Loading…" />}>
+                <Routes>
+                    <Route path="/" element={<News />} />
+                    <Route path="news/:id" element={<NewsItem />} />
+                    <Route path="comments" element={<Comments />} />
+                    <Route path="favorites" element={<Favorites />} />
+                </Routes>
+            </Suspense>
+        </Layout>
+    );
 }
 
 export default App;
